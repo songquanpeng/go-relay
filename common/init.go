@@ -11,6 +11,14 @@ var (
 	ConfigFile   = flag.String("config", "go-relay.yaml", "Config file path")
 )
 
+func printUsage() {
+	println("Go Public " + Version + " - A simple HTTP relay server.")
+	println("Copyright (C) 2023 JustSong. All rights reserved.")
+	println("GitHub: https://github.com/songquanpeng/go-relay")
+	println("Usage: go-relay [--config <config file path>] [--version] [--help]")
+	println("       go-relay init")
+}
+
 func init() {
 	flag.Parse()
 	if *PrintVersion {
@@ -18,7 +26,7 @@ func init() {
 		os.Exit(0)
 	}
 	if *PrintHelp {
-		flag.PrintDefaults()
+		printUsage()
 		os.Exit(0)
 	}
 	if len(os.Args) > 1 && os.Args[1] == "init" {
