@@ -1,4 +1,4 @@
-module go-template
+module go-relay
 
 go 1.19
 

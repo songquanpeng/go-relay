@@ -6,9 +6,8 @@ import (
 )
 
 type Config struct {
-	Host     string `yaml:"host"`
-	Port     int    `yaml:"port"`
-	Password string `yaml:"password"`
+	Port  int    `yaml:"port"`
+	Token string `yaml:"token"`
 }
 
 var CONFIG = Config{}
@@ -19,9 +18,8 @@ func initConfigFile() {
 		os.Exit(1)
 	}
 	defaultConfig := Config{
-		Host:     "localhost",
-		Port:     6971,
-		Password: "123456",
+		Port:  6972,
+		Token: "123456",
 	}
 	defaultConfigBytes, err := yaml.Marshal(defaultConfig)
 	if err != nil {
@@ -37,14 +35,18 @@ func initConfigFile() {
 }
 
 func loadConfigFile() {
+	// Check if config file exists.
+	if _, err := os.Stat(*ConfigFile); err != nil {
+		initConfigFile()
+	}
 	configBytes, err := os.ReadFile(*ConfigFile)
 	if err != nil {
-		println("Config file `" + *ConfigFile + "` not found, use subcommand `init` to create a new one.")
+		println("Failed to read config file: " + err.Error())
 		os.Exit(1)
 	}
 	err = yaml.Unmarshal(configBytes, &CONFIG)
 	if err != nil {
-		println(err.Error())
+		println("Failed to parse config file: " + err.Error())
 		os.Exit(1)
 	}
 }
