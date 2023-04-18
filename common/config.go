@@ -18,7 +18,7 @@ func initConfigFile() {
 		os.Exit(1)
 	}
 	defaultConfig := Config{
-		Port:  6972,
+		Port:  6872,
 		Token: GenerateToken(),
 	}
 	defaultConfigBytes, err := yaml.Marshal(defaultConfig)
