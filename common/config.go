@@ -19,7 +19,7 @@ func initConfigFile() {
 	}
 	defaultConfig := Config{
 		Port:  6972,
-		Token: "123456",
+		Token: GenerateToken(),
 	}
 	defaultConfigBytes, err := yaml.Marshal(defaultConfig)
 	if err != nil {
@@ -31,7 +31,7 @@ func initConfigFile() {
 		println(err.Error())
 		os.Exit(1)
 	}
-	println("Config file created successfully, file path: " + *ConfigFile)
+	println("Initialized config file at: " + *ConfigFile)
 }
 
 func loadConfigFile() {
