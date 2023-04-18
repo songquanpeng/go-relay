@@ -2,17 +2,11 @@ package handler
 
 import (
 	"fmt"
-	"go-relay/common"
 	"io"
 	"net/http"
 )
 
 func RelayHandler(w http.ResponseWriter, r *http.Request) {
-	// Check token first.
-	if r.Header.Get("X-Relay-Token") != common.CONFIG.Token {
-		http.Error(w, "Invalid token", http.StatusUnauthorized)
-		return
-	}
 	// Check host.
 	if r.Header.Get("X-Relay-Host") == "" {
 		http.Error(w, "Invalid host", http.StatusBadRequest)
