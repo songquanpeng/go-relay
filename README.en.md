@@ -1,12 +1,12 @@
 <p align="right">
-   <strong>中文</strong> | <a href="./README.en.md">English</a>
+   <a href="./README.md">中文</a> | <strong>English</strong>
 </p>
 
 <div align="center">
 
 # Go Relay
 
-_✨ 基于 Go 的 HTTP 中继，开箱即用 ✨_
+_✨ Golang based HTTP relay server, easy to deploy & use ✨_
 
 </div>
 
@@ -28,39 +28,38 @@ _✨ 基于 Go 的 HTTP 中继，开箱即用 ✨_
   </a>
 </p>
 
-## 功能
-+ [x] 开箱即用
-+ [x] Token 认证
-+ [ ] 支持 IP 白名单
+## Features
++ [x] Easy to use
++ [x] Token authentication
++ [ ] Support IP whitelist
 
-## 用法
-
-### 服务端
+## Usage
+### Server
 
 ```bash
-# 初始化配置文件
+# Initialize configuration file
 ./go-relay init
-# 检查并保存生成的令牌
+# Check and save the generated token
 cat go-relay.yaml
-# 启动服务器
+# Start the server
 ./go-relay
 ```
 
-或者使用 Docker 进行部署：
+Or deploy using Docker:
 
 ```bash
 docker run -d --restart always --name go-relay -p 6872:6872 -v /home/ubuntu/data/go-relay:/app justsong/go-relay
 ```
 
-### 客户端
-进行 HTTP 请求时，将请求 URL 中的主机地址和端口替换为你的中继服务器地址和端口。
+### Client
+When making an HTTP request, replace the host address and port in the request URL with your relay server address and port.
 
-然后在请求头中添加以下字段：
-1. `X-Relay-Token`：Go Relay 服务端配置的令牌
-2. `X-Relay-Host`：要请求的目标地址
-3. `X-Relay-Protocol`：请求协议，可选，默认为 `https`
+Then add the following fields to the request header:
+1. `X-Relay-Token`: Token configured on Go Relay server
+2. `X-Relay-Host`: Target address to request
+3. `X-Relay-Protocol`: Request protocol, optional, defaults to https
 
-## 流程图
+## Flowchart
 
 ```mermaid
 sequenceDiagram
