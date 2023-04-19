@@ -31,10 +31,13 @@ _✨ Golang based HTTP relay server, easy to deploy & use ✨_
 ## Features
 + [x] Easy to use
 + [x] Token authentication
++ [x] HTTP basic authentication
++ [x] Support mirror website
 + [ ] Support IP whitelist
 
 ## Usage
-### Server
+### Relay Mode
+#### Server
 
 ```bash
 # Initialize configuration file
@@ -51,13 +54,21 @@ Or deploy using Docker:
 docker run -d --restart always --name go-relay -p 6872:6872 -v /home/ubuntu/data/go-relay:/app justsong/go-relay
 ```
 
-### Client
+#### Client
 When making an HTTP request, replace the host address and port in the request URL with your relay server address and port.
 
 Then add the following fields to the request header:
 1. `X-Relay-Token`: Token configured on Go Relay server
 2. `X-Relay-Host`: Target address to request
 3. `X-Relay-Protocol`: Request protocol, optional, defaults to https
+
+### Mirror Mode
+```bash
+./go-relay mirror https://www.google.com/
+```
+
+If you don't want anyone to use your mirror site, you can specify `username` and `password` in the configuration file, 
+and then use HTTP Basic Auth for authentication when making a request.
 
 ## Flowchart
 
