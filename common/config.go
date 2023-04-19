@@ -6,8 +6,10 @@ import (
 )
 
 type Config struct {
-	Port  int    `yaml:"port"`
-	Token string `yaml:"token"`
+	Port     int    `yaml:"port"`
+	Token    string `yaml:"token"`    // For relay mode
+	Username string `yaml:"username"` // For mirror mode
+	Password string `yaml:"password"` // For mirror mode
 }
 
 var CONFIG = Config{}
