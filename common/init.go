@@ -3,6 +3,7 @@ package common
 import (
 	"flag"
 	"os"
+	"strings"
 )
 
 var (
@@ -17,6 +18,7 @@ func printUsage() {
 	println("GitHub: https://github.com/songquanpeng/go-relay")
 	println("Usage: go-relay [--config <config file path>] [--version] [--help]")
 	println("       go-relay init")
+	println("       go-relay mirror <website>")
 }
 
 func init() {
@@ -32,6 +34,21 @@ func init() {
 	if len(os.Args) > 1 && os.Args[1] == "init" {
 		initConfigFile()
 		os.Exit(0)
+	}
+	if len(os.Args) > 1 && os.Args[1] == "mirror" {
+		if len(os.Args) > 2 {
+			MirrorMode = true
+			MirrorWebsite = os.Args[2]
+			if !strings.HasPrefix(MirrorWebsite, "http://") && !strings.HasPrefix(MirrorWebsite, "https://") {
+				MirrorWebsite = "https://" + MirrorWebsite
+			}
+			if strings.HasSuffix(MirrorWebsite, "/") {
+				MirrorWebsite = MirrorWebsite[:len(MirrorWebsite)-1]
+			}
+		} else {
+			printUsage()
+			os.Exit(0)
+		}
 	}
 	loadConfigFile()
 }
