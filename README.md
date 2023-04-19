@@ -68,6 +68,12 @@ docker run -d --restart always --name go-relay -p 6872:6872 -v /home/ubuntu/data
 ./go-relay mirror https://www.google.com/
 ```
 
+或者使用 Docker 进行部署：
+
+```bash
+docker run -d --restart always --name go-relay -p 6872:6872 -v /home/ubuntu/data/go-relay:/app justsong/go-relay mirror https://www.google.com/
+```
+
 如果你不想要任何人都能使用你的镜像站，可以在配置文件中指定 `username` 和 `password`，之后在请求时使用 HTTP Basic Auth 进行认证。
 
 ## 流程图
